@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorageXamarinApp.MainPage">
+
+    <StackLayout BackgroundColor="White">
+        
+        <Label Text="Storage App!" VerticalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="0,220,0,50" TextColor="#0D0D0D" FontSize="36"/>
+        <Label Text="Chooce your account and storage" HorizontalTextAlignment="Center" FontSize="16"></Label>
+        <Button x:Name="SelectButton" Text="Select account" FontSize="16" HorizontalOptions="Fill" Margin="10" CornerRadius="20" BackgroundColor="#F2F2F2" Clicked="SelectButton_Clicked"></Button>
+
+    </StackLayout>
+
+</ContentPage>
