@@ -1,4 +1,5 @@
-﻿using Rg.Plugins.Popup.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Rg.Plugins.Popup.Extensions;
 using StorageXamarinApp.Models;
 using StorageXamarinApp.ViewModels;
 using System;
@@ -8,18 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace StorageXamarinApp.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountSelectPage : Rg.Plugins.Popup.Pages.PopupPage
     {
         public event EventHandler<AccountSelectedEventArgs> AccountSelected;
         public AccountSelectPage()
         {
             InitializeComponent();
-            BindingContext = new AccountsViewModel();
+            BindingContext = Startup.ServiceProvider.GetService<AccountsViewModel>();
         }
         private void Button_Clicked(object sender, EventArgs e)
         { 

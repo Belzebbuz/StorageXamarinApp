@@ -9,7 +9,7 @@ namespace StorageXamarinApp
         public App()
         {
             InitializeComponent();
-
+            Startup.Init();
             MainPage = new MainPage();
         }
 

@@ -13,8 +13,7 @@
             <StackLayout Padding="3">
                 <ListView ItemsSource="{Binding Accounts}" 
                           HasUnevenRows="True" 
-                          ItemTapped="AccountItem_Clicked"
-                          SelectedItem="{Binding SelectedAccount}">
+                          ItemTapped="AccountItem_Clicked">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <custom:CustomViewCell SelectedItemBackgroundColor="White">

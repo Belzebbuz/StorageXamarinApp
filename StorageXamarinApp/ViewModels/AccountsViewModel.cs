@@ -1,4 +1,5 @@
 ﻿using StorageXamarinApp.Models;
+using StorageXamarinApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,20 +11,11 @@ namespace StorageXamarinApp.ViewModels
 {
     public class AccountsViewModel
     {
-        public AccountsViewModel()
+        public AccountsViewModel(IAccountService accountService)
         {
-            Accounts = new ObservableCollection<Account>()
-            {
-                new Account("General"),
-                new Account("Manager"),
-                new Account("Director"),
-                new Account("Main"),
-                new Account("Super storager"),
-                new Account("Genius")
-            };
+            Accounts = accountService.GetAccountsList();
         }
 
-        public ObservableCollection<Account> Accounts { get; private set; }
-        public Account SelectedAccount { get; private set; }
+        public List<Account> Accounts { get; private set; }
     }
 }
