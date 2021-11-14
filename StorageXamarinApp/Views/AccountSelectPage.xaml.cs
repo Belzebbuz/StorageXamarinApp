@@ -21,11 +21,6 @@ namespace StorageXamarinApp.Views
             InitializeComponent();
             BindingContext = new AccountsViewModel();
         }
-
-        protected override void OnAppearing()
-        {
-            
-        }
         private void Button_Clicked(object sender, EventArgs e)
         { 
             Navigation.PopPopupAsync();            
