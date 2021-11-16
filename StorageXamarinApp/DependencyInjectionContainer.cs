@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using StorageXamarinApp.Services;
 using StorageXamarinApp.ViewModels;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace StorageXamarinApp
@@ -13,13 +14,22 @@ namespace StorageXamarinApp
     {
         public static IServiceCollection ConfigureServices(this IServiceCollection services)
         {
-            services.AddSingleton<IAccountService, AccountsFillService>();
+            services.AddRefitClient<IStorageServer>(new RefitSettings()
+            {
+                ContentSerializer = new SystemTextJsonContentSerializer(
+                    new JsonSerializerOptions()
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                        WriteIndented = true
+                    })
+            }).ConfigureHttpClient(c => c.BaseAddress = new Uri("https://storageapiservice.azurewebsites.net/api"));
+            services.AddSingleton<IAccountService, AccountsService>();
             return services;
         }
 
         public static IServiceCollection ConfigureViewModels(this IServiceCollection services)
         {
-            services.AddTransient<AccountsViewModel>();
+            services.AddScoped<AccountsViewModel>();
             return services;
         }
     }

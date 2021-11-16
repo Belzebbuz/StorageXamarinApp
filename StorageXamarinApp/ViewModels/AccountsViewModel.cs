@@ -3,19 +3,41 @@ using StorageXamarinApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StorageXamarinApp.ViewModels
 {
-    public class AccountsViewModel
+    public class AccountsViewModel : BaseViewModel
     {
+        
         public AccountsViewModel(IAccountService accountService)
         {
-            Accounts = accountService.GetAccountsList();
+            _accountService = accountService;
+            FillAccounts();
         }
 
-        public List<Account> Accounts { get; private set; }
+        private IAccountService _accountService;
+        private List<AccountModel> _accounts;
+
+        public List<AccountModel> Accounts
+        {
+            get { return _accounts; }
+            set 
+            { 
+                if(_accounts != value)
+                {
+                    _accounts = value;
+                    OnPropertyChanged("Accounts");
+                }
+            }
+        }
+
+        public async void FillAccounts()
+        {
+            Accounts = await _accountService.GetAccounts();
+        }
     }
 }

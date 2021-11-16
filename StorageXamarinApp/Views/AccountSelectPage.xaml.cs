@@ -18,8 +18,9 @@ namespace StorageXamarinApp.Views
         public AccountSelectPage()
         {
             InitializeComponent();
-            BindingContext = Startup.ServiceProvider.GetService<AccountsViewModel>();
+            BindingContext = Startup.ServiceProvider.GetService<AccountsViewModel>();                        
         }
+
         private void Button_Clicked(object sender, EventArgs e)
         { 
             Navigation.PopPopupAsync();            
@@ -27,7 +28,7 @@ namespace StorageXamarinApp.Views
 
         private void AccountItem_Clicked(object sender, AccountSelectedEventArgs e)
         {           
-            e.Name = (e.Item as Account).Name;
+            e.Name = (e.Item as AccountModel).Name;
             AccountSelected?.Invoke(sender, e);
             (sender as ListView).SelectedItem = null;
             Navigation.PopPopupAsync();
