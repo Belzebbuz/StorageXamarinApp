@@ -1,53 +1,42 @@
 ﻿using Rg.Plugins.Popup.Extensions;
 using StorageXamarinApp.CustomViews;
-using StorageXamarinApp.Models;
-using StorageXamarinApp.Views;
+using StorageXamarinApp.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace StorageXamarinApp
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace StorageXamarinApp.Views
 {
     public partial class MainPage : ContentPage
     {
-        private AccountSelectPage _accountSelectPage;
+        private AddNomenclatureView _addNomenclatureView;
+        private MainPageModel _model;
         public MainPage()
         {
             InitializeComponent();
+            _model = Startup.ServiceProvider.GetService<MainPageModel>();
+            BindingContext = _model;
         }
 
-        protected override void OnAppearing()
+        private async void AddNomenclatureButton_Clicked(object sender, EventArgs e)
         {
-            _accountSelectPage = new AccountSelectPage();
-            _accountSelectPage.AccountSelected += _accountSelectPage_AccountSelected;
-        }
-        protected override void OnDisappearing()
-        {
-            _accountSelectPage.AccountSelected -= _accountSelectPage_AccountSelected;
+            _addNomenclatureView = new AddNomenclatureView();
+            await Navigation.PushPopupAsync(_addNomenclatureView);
         }
 
-        private void _accountSelectPage_AccountSelected(object sender, AccountSelectedEventArgs e)
+        private void ShippingPage_TabTapped(object sender, Xamarin.CommunityToolkit.UI.Views.TabTappedEventArgs e)
         {
-            SelectButton.Text = e.Name;
-            if (StartButton.Scale != 1)
-            {
-                UIAnimations.AnimateInOutScaleRotation(StartButton);
-            }
-
+            _model.UpdateShippingOperations(); 
         }
 
-        private void SelectButton_Clicked(object sender, EventArgs e)
+        private void ReceivePage_TabTapped(object sender, Xamarin.CommunityToolkit.UI.Views.TabTappedEventArgs e)
         {
-            Navigation.PushPopupAsync(_accountSelectPage);
-        }
-
-        private void StartButton_Clicked(object sender, EventArgs e)
-        {
-            UIAnimations.AnimateClickScale(StartButton);
+            _model.UpdateReceiveOperations();
         }
     }
 }

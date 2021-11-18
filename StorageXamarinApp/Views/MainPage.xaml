@@ -1,14 +1,76 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!---->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StorageXamarinApp.MainPage">
-
-    <StackLayout BackgroundColor="White">
-        
-        <Label Text="Storage App!" VerticalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="0,220,0,50" TextColor="#0D0D0D" FontSize="36"/>
-        <Label Text="Chooce your account and storage" HorizontalTextAlignment="Center" FontSize="16"></Label>
-        <Button x:Name="SelectButton" Text="Select account" FontSize="16" HorizontalOptions="Fill" Margin="10" CornerRadius="20" BackgroundColor="#F2F2F2" Clicked="SelectButton_Clicked"></Button>
-        <Button x:Name="StartButton" HorizontalOptions="Center" Text="GO" Font="25" HeightRequest="80" WidthRequest="80" CornerRadius="40" Scale="0" Clicked="StartButton_Clicked"/>
-    </StackLayout>
-
+             x:Class="StorageXamarinApp.Views.MainPage"
+            NavigationPage.HasNavigationBar="False"            
+            xmlns:xct ="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
+    <xct:TabView TabStripPlacement="Bottom">
+        <xct:TabViewItem Text="Receive" TabTapped="ReceivePage_TabTapped">
+            <xct:TabViewItem.Content>
+                <ListView ItemsSource="{Binding ReceiveViewModel.ReceiveOperations}" 
+                          HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Margin="4" BackgroundColor="#F2F2F2" CornerRadius="10" >
+                                    <StackLayout Orientation="Horizontal" Padding="-2">
+                                        <Label Text="{Binding Nomenclature.Name}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                        <Label Text="{Binding Count}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </xct:TabViewItem.Content>
+        </xct:TabViewItem>
+        <xct:TabViewItem Text="Shipping" TabTapped="ShippingPage_TabTapped">
+            <xct:TabViewItem.Content>
+                <StackLayout>
+                    <ListView ItemsSource="{Binding ShippingViewModel.ShippingOperations}" 
+                          HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="4" BackgroundColor="#F2F2F2" CornerRadius="10" >
+                                        <StackLayout Orientation="Horizontal" Padding="-2">
+                                            <Label Text="{Binding Nomenclature.Name}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                            <Label Text="{Binding Count}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </xct:TabViewItem.Content>
+        </xct:TabViewItem>
+        <xct:TabViewItem Text="Nomenclature">
+            <xct:TabViewItem.Content>
+                <StackLayout>
+                    <ListView ItemsSource="{Binding NomenclatureViewModel.Nomenclatures}" 
+                          HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="4" BackgroundColor="#F2F2F2" CornerRadius="10" >
+                                        <StackLayout Orientation="Horizontal" Padding="-2">
+                                            <Label Text="{Binding Name}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                            <Label Text="{Binding Unit}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button x:Name="AddNomenclatureButton"
+                            Margin="40"
+                            HorizontalOptions="Center" Text="+" Font="30" 
+                            HeightRequest="60" WidthRequest="60" CornerRadius="30" 
+                            Clicked="AddNomenclatureButton_Clicked"/>
+                </StackLayout>
+            </xct:TabViewItem.Content>
+        </xct:TabViewItem>
+    </xct:TabView>
 </ContentPage>

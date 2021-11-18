@@ -12,35 +12,25 @@ using Xamarin.Forms;
 
 namespace StorageXamarinApp.Views
 {
-    public partial class AccountSelectPage : Rg.Plugins.Popup.Pages.PopupPage
+    public partial class AccountSelectView : Rg.Plugins.Popup.Pages.PopupPage
     {
-        public event EventHandler<AccountSelectedEventArgs> AccountSelected;
-        public AccountSelectPage()
+        public event EventHandler<ItemTappedEventArgs> AccountSelected;
+        public AccountSelectView()
         {
             InitializeComponent();
             BindingContext = Startup.ServiceProvider.GetService<AccountsViewModel>();                        
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void CloseButton_Clicked(object sender, EventArgs e)
         { 
             Navigation.PopPopupAsync();            
         }
 
-        private void AccountItem_Clicked(object sender, AccountSelectedEventArgs e)
+        private void AccountItem_Clicked(object sender, ItemTappedEventArgs e)
         {           
-            e.Name = (e.Item as AccountModel).Name;
             AccountSelected?.Invoke(sender, e);
             (sender as ListView).SelectedItem = null;
             Navigation.PopPopupAsync();
         }
-    }
-
-    public class AccountSelectedEventArgs : ItemTappedEventArgs
-    {
-        public AccountSelectedEventArgs(object group, object item, int itemIndex) : base(group, item, itemIndex)
-        {
-        }
-
-        public string Name { get; set; }
     }
 }

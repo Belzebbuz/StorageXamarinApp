@@ -11,7 +11,9 @@ namespace StorageXamarinApp.Services
 {
     public interface IAccountService
     {
-        Task<List<AccountModel>> GetAccounts();
+        Task<List<Account>> GetAccounts();
+        Account GetUserAccount();
+        void SetUserAccount(Account account);
     }
     public class AccountsService : IAccountService
     {
@@ -19,9 +21,10 @@ namespace StorageXamarinApp.Services
         {
             _storageServer = storageServer;
         }
-        private IStorageServer _storageServer;
-        private List<AccountModel> _accounts;
-        public async Task<List<AccountModel>> GetAccounts()
+        private readonly IStorageServer _storageServer;
+        private List<Account> _accounts;
+        private Account _userAccount;
+        public async Task<List<Account>> GetAccounts()
         {
             try
             {
@@ -33,6 +36,12 @@ namespace StorageXamarinApp.Services
             }
 
             return _accounts;
+        }
+        public Account GetUserAccount() => _userAccount;
+        public void SetUserAccount(Account account)
+        {
+            if (account != null)
+                _userAccount = account;
         }
 
     }

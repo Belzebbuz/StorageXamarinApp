@@ -24,12 +24,20 @@ namespace StorageXamarinApp
                     })
             }).ConfigureHttpClient(c => c.BaseAddress = new Uri("https://storageapiservice.azurewebsites.net/api"));
             services.AddSingleton<IAccountService, AccountsService>();
+            services.AddSingleton<INomenclatureService, NomenclatureService>();
+            services.AddSingleton<IReceiveService, ReceiveService>();
+            services.AddSingleton<IShippingService, ShippingService>();
             return services;
         }
 
         public static IServiceCollection ConfigureViewModels(this IServiceCollection services)
         {
-            services.AddScoped<AccountsViewModel>();
+            services.AddTransient<AccountsViewModel>();
+            services.AddTransient<AddNomenclatureViewModel>();
+            services.AddTransient<ShippingViewModel>();
+            services.AddTransient<NomenclatureViewModel>();
+            services.AddTransient<ReceiveViewModel>();
+            services.AddSingleton<MainPageModel>();
             return services;
         }
     }

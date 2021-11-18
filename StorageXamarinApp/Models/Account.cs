@@ -3,10 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace StorageXamarinApp.Models
 {
-    public class AccountModel
+    public class Account
     {
         [JsonPropertyName("id")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }

@@ -20,9 +20,9 @@ namespace StorageXamarinApp.ViewModels
         }
 
         private IAccountService _accountService;
-        private List<AccountModel> _accounts;
+        private List<Account> _accounts;
 
-        public List<AccountModel> Accounts
+        public List<Account> Accounts
         {
             get { return _accounts; }
             set 

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <pages:PopupPage  
-    xmlns:pages="http://rotorgames.com"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:custom="clr-namespace:StorageXamarinApp.CustomViews"
-    x:Class="StorageXamarinApp.Views.AccountSelectPage">
+    x:Class="StorageXamarinApp.Views.AccountSelectView">
     <pages:PopupPage.Content>
         <Frame BackgroundColor="White"
            Margin="40,100"
@@ -16,18 +16,18 @@
                           ItemTapped="AccountItem_Clicked">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <custom:CustomViewCell SelectedItemBackgroundColor="White">
+                            <ViewCell>
                                 <ViewCell.View>
                                     <Frame Margin="4" BackgroundColor="#F2F2F2" CornerRadius="10" >
                                         <Label Text="{Binding Name}" FontSize="15" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
                                     </Frame>
                                 </ViewCell.View>
-                            </custom:CustomViewCell>
+                            </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
                 <Button HeightRequest="30" Text="Close" 
-                    Clicked="Button_Clicked"
+                    Clicked="CloseButton_Clicked"
                     VerticalOptions="EndAndExpand"
                     BackgroundColor="#F2F2F2" Margin="40,10" 
                     FontSize="14" CornerRadius="20" Padding="3"></Button>
