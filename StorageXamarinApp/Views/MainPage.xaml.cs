@@ -23,6 +23,11 @@ namespace StorageXamarinApp.Views
             BindingContext = _model;
         }
 
+        protected override void OnAppearing()
+        {
+            _model.UpdateInfo();
+        }
+
         private async void AddNomenclatureButton_Clicked(object sender, EventArgs e)
         {
             _addNomenclatureView = new AddNomenclatureView();
@@ -37,6 +42,15 @@ namespace StorageXamarinApp.Views
         private void ReceivePage_TabTapped(object sender, Xamarin.CommunityToolkit.UI.Views.TabTappedEventArgs e)
         {
             _model.UpdateReceiveOperations();
+        }
+
+        private async void AddReceiveOperationButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushPopupAsync(new AddReceiveOpearionView());
+        }
+        private async void AddShippingOperationButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushPopupAsync(new AddShippingOperationView());
         }
     }
 }

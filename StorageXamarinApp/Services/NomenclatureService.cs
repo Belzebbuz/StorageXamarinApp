@@ -12,6 +12,7 @@ namespace StorageXamarinApp.Services
     {
         Task<List<Nomenclature>> GetNomenclatures();
         Task<string> PostNomenclature(Nomenclature nomenclature);
+        Task<Nomenclature> GetNomenclature(int nomenclatureId);
     }
     public class NomenclatureService : INomenclatureService
     {        
@@ -47,6 +48,18 @@ namespace StorageXamarinApp.Services
                 return ex.ToString();
             }
              
+        }
+
+        public async Task<Nomenclature> GetNomenclature(int nomenclatureId)
+        {
+            try
+            {
+                return await _storageServer.GetNomenclature(nomenclatureId);
+            }
+            catch (ApiException ex)
+            {
+                return null;
+            }
         }
     }
 }

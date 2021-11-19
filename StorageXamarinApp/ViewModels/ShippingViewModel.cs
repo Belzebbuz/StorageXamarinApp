@@ -13,7 +13,6 @@ namespace StorageXamarinApp.ViewModels
         public ShippingViewModel(IShippingService shippingService)
         {
             _shippingService = shippingService;
-            FillShippingOperations();
         }
         private IShippingService _shippingService;
         private List<Operation> _shippingOperations;

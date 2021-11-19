@@ -8,21 +8,29 @@
     <xct:TabView TabStripPlacement="Bottom">
         <xct:TabViewItem Text="Receive" TabTapped="ReceivePage_TabTapped">
             <xct:TabViewItem.Content>
-                <ListView ItemsSource="{Binding ReceiveViewModel.ReceiveOperations}" 
+                <StackLayout>
+                    <ListView ItemsSource="{Binding ReceiveViewModel.ReceiveOperations}" 
                           HasUnevenRows="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Frame Margin="4" BackgroundColor="#F2F2F2" CornerRadius="10" >
-                                    <StackLayout Orientation="Horizontal" Padding="-2">
-                                        <Label Text="{Binding Nomenclature.Name}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
-                                        <Label Text="{Binding Count}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
-                                    </StackLayout>
-                                </Frame>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame Margin="4" BackgroundColor="#F2F2F2" CornerRadius="10" >
+                                        <StackLayout Orientation="Horizontal" Padding="-2">
+                                            <Label Text="{Binding Nomenclature.Name}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                            <Label Text="{Binding Count, StringFormat='Count: {0}'}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                            <Label Text="{Binding DateTime}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button x:Name="AddReceiveOperation"
+                            Margin="40"
+                            HorizontalOptions="Center" Text="+" Font="30" 
+                            HeightRequest="60" WidthRequest="60" CornerRadius="30" 
+                            Clicked="AddReceiveOperationButton_Clicked"/>
+                </StackLayout>                
             </xct:TabViewItem.Content>
         </xct:TabViewItem>
         <xct:TabViewItem Text="Shipping" TabTapped="ShippingPage_TabTapped">
@@ -36,13 +44,19 @@
                                     <Frame Margin="4" BackgroundColor="#F2F2F2" CornerRadius="10" >
                                         <StackLayout Orientation="Horizontal" Padding="-2">
                                             <Label Text="{Binding Nomenclature.Name}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
-                                            <Label Text="{Binding Count}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                            <Label Text="{Binding Count, StringFormat='Count: {0}'}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                            <Label Text="{Binding DateTime}" FontSize="12" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
                                         </StackLayout>
                                     </Frame>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    <Button x:Name="AddShippingOperation"
+                            Margin="40"
+                            HorizontalOptions="Center" Text="+" Font="30" 
+                            HeightRequest="60" WidthRequest="60" CornerRadius="30" 
+                            Clicked="AddShippingOperationButton_Clicked"/>
                 </StackLayout>
             </xct:TabViewItem.Content>
         </xct:TabViewItem>

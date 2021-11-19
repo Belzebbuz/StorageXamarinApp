@@ -12,6 +12,8 @@ namespace StorageXamarinApp.Services
     public interface IReceiveService
     {
         Task<List<Operation>> GetReceiveOperations();
+
+        Task<string> PostOperation(Operation operation);
     }
     public class ReceiveService : IReceiveService
     {
@@ -35,6 +37,19 @@ namespace StorageXamarinApp.Services
             }
 
             return _receiveOperations;
+        }
+
+        public async Task<string> PostOperation(Operation operation)
+        {
+            try
+            {
+                await _storageServer.PostOperation(operation);
+                return "Ok";
+            }
+            catch (ApiException ex)
+            {
+                return ex.ToString();
+            }
         }
     }
 }

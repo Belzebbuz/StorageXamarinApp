@@ -14,9 +14,11 @@ namespace StorageXamarinApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddNomenclatureView : Rg.Plugins.Popup.Pages.PopupPage
     {
+        private AddNomenclatureViewModel _viewModel;
         public AddNomenclatureView()
         {
             InitializeComponent();
+            _viewModel = Startup.ServiceProvider.GetService<AddNomenclatureViewModel>();
         }
 
         private void CloseButton_Clicked(object sender, EventArgs e)
@@ -26,7 +28,7 @@ namespace StorageXamarinApp.Views
 
         private async void AddButton_Clicked(object sender, EventArgs e)
         {
-            var answer = await Startup.ServiceProvider.GetService<AddNomenclatureViewModel>().PostNewNomenclature(EntryName.Text, EntryUnit.Text);
+            var answer = await _viewModel.PostNewNomenclature(EntryName.Text, EntryUnit.Text);
             if (answer != "Ok")
             {
                 await DisplayAlert("Something go wrong!", answer, "Ok");

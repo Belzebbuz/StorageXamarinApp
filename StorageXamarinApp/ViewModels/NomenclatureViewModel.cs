@@ -13,7 +13,6 @@ namespace StorageXamarinApp.ViewModels
         public NomenclatureViewModel(INomenclatureService nomenclatureService)
         {
             _nomenclatureService = nomenclatureService;
-            FillNomenclatures();
         }
         private INomenclatureService _nomenclatureService;
         private List<Nomenclature> _nomenclatures;

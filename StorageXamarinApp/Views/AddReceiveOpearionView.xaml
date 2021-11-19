@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:StorageXamarinApp.CustomViews"
+    xmlns:xct ="clr-namespace:Xamarin.CommunityToolkit.Behaviors;assembly=Xamarin.CommunityToolkit"
+    x:Class="StorageXamarinApp.Views.AddReceiveOpearionView">
+    <pages:PopupPage.Content>
+        <Frame BackgroundColor="White"
+           Margin="40,100"
+           CornerRadius="20" 
+           VerticalOptions="FillAndExpand">
+            <StackLayout Padding="3">
+                <StackLayout Orientation="Vertical">
+                    <Frame Margin="10" CornerRadius="10" BackgroundColor="#F2F2F2">
+                        <Entry x:Name="EntryNomenclatureId" HorizontalOptions="FillAndExpand" 
+                                   Margin="-10" FontSize="15"
+                                   BackgroundColor="#F2F2F2" Placeholder="Nomenclature Id" PlaceholderColor="LightGray" 
+                                   xct:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference EntryCount}"/>
+                    </Frame>
+                    <Frame Margin="10" CornerRadius="10" BackgroundColor="#F2F2F2">
+                        <Entry x:Name="EntryCount" HorizontalOptions="FillAndExpand" 
+                                   Margin="-10" FontSize="15"
+                                   BackgroundColor="#F2F2F2" Placeholder="Count" PlaceholderColor="LightGray"/>
+                    </Frame>
+                </StackLayout>
+                <Button HeightRequest="40" Text="Add"
+                    VerticalOptions="End"
+                    BackgroundColor="#F2F2F2" Margin="20,70,20,0" 
+                    FontSize="18" CornerRadius="20" Padding="3"
+                        Clicked="AddButton_Clicked"/>
+                <Button HeightRequest="30" Text="Close"
+                    VerticalOptions="EndAndExpand"
+                    BackgroundColor="#F2F2F2" Margin="40,0" 
+                    FontSize="14" CornerRadius="20" Padding="3"
+                        Clicked="CloseButton_Clicked"/>
+            </StackLayout>
+        </Frame>
+    </pages:PopupPage.Content>
+</pages:PopupPage>

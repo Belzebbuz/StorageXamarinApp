@@ -13,7 +13,6 @@ namespace StorageXamarinApp.ViewModels
         public ReceiveViewModel(IReceiveService receiveService)
         {
             _receiveService = receiveService;
-            FillReceiveOperations();
         }
         private IReceiveService _receiveService;
         private List<Operation> _receiveOperations;

@@ -34,6 +34,8 @@ namespace StorageXamarinApp
         {
             services.AddTransient<AccountsViewModel>();
             services.AddTransient<AddNomenclatureViewModel>();
+            services.AddTransient<AddReceiveOperationViewModel>();
+            services.AddTransient<AddShippingOperationViewModel>();
             services.AddTransient<ShippingViewModel>();
             services.AddTransient<NomenclatureViewModel>();
             services.AddTransient<ReceiveViewModel>();

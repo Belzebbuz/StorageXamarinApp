@@ -16,7 +16,6 @@ namespace StorageXamarinApp.ViewModels
             ShippingViewModel = Startup.ServiceProvider.GetService<ShippingViewModel>();
             NomenclatureViewModel = Startup.ServiceProvider.GetService<NomenclatureViewModel>();
             ReceiveViewModel = Startup.ServiceProvider.GetService<ReceiveViewModel>();
-
         }
         public ShippingViewModel ShippingViewModel { get; set; }
         public NomenclatureViewModel NomenclatureViewModel { get; set; }
@@ -34,6 +33,13 @@ namespace StorageXamarinApp.ViewModels
         public void UpdateReceiveOperations()
         {
             ReceiveViewModel.FillReceiveOperations();           
+        }
+
+        public void UpdateInfo()
+        {
+            ShippingViewModel.FillShippingOperations();
+            NomenclatureViewModel.FillNomenclatures();
+            ReceiveViewModel.FillReceiveOperations();
         }
     }
 }

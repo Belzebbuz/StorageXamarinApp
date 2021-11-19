@@ -12,6 +12,7 @@ namespace StorageXamarinApp.Services
     public interface IShippingService
     {
         Task<List<Operation>> GetShippingOperations();
+        Task<string> PostOperation(Operation operation);
     }
     public class ShippingService: IShippingService
     {
@@ -35,6 +36,19 @@ namespace StorageXamarinApp.Services
             }
 
             return _shippingOperations;
+        }
+
+        public async Task<string> PostOperation(Operation operation)
+        {
+            try
+            {
+                await _storageServer.PostOperation(operation);
+                return "Ok";
+            }
+            catch (ApiException ex)
+            {
+                return ex.ToString();
+            }
         }
     }
 }
