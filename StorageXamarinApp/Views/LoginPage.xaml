@@ -3,13 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StorageXamarinApp.LoginPage"
              NavigationPage.HasNavigationBar="False">
-
-    <StackLayout BackgroundColor="White">
-        
-        <Label Text="Storage App!" VerticalOptions="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="0,220,0,50" TextColor="#0D0D0D" FontSize="36"/>
-        <Label Text="Chooce your account and storage" HorizontalTextAlignment="Center" FontSize="16"></Label>
-        <Button x:Name="SelectButton" Text="Select account" FontSize="16" HorizontalOptions="Fill" Margin="10" CornerRadius="20" BackgroundColor="#F2F2F2" Clicked="SelectButton_Clicked"></Button>
-        <Button x:Name="StartButton" HorizontalOptions="Center" Text="GO" Font="25" HeightRequest="80" WidthRequest="80" CornerRadius="40" Scale="0" Clicked="StartButton_Clicked"/>
-    </StackLayout>
-
+    <Grid RowDefinitions="*,2*,Auto">
+        <BoxView Grid.RowSpan="3">
+            <BoxView.Background>
+                <LinearGradientBrush>
+                    <GradientStopCollection>
+                        <GradientStop Color="#17A68C" Offset="0"/>
+                        <GradientStop Color="#1BBFA1" Offset="1"/>
+                    </GradientStopCollection>
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>        
+            <StackLayout Grid.Row="1" HorizontalOptions="Center" Margin="0,0,0,0" Spacing="15">
+                <Label Text="Storage App!" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="#F2F2F2" FontSize="36" FontFamily="Bold"/>
+            <Label Text="Chooce your account" HorizontalTextAlignment="Center" FontSize="16" TextColor="#F2F2F2" FontFamily="Thin"/>
+            <Button x:Name="SelectButton" FontFamily="Thin" Text="Select account" FontSize="20" HorizontalOptions="Fill" CornerRadius="20" BackgroundColor="#F2F2F2" Clicked="SelectButton_Clicked"></Button>
+            <Button x:Name="StartButton" FontFamily="Thin" Margin="0,30" HorizontalOptions="Center" Text="GO" FontSize="30" HeightRequest="80" WidthRequest="80" CornerRadius="40" Scale="0" Clicked="StartButton_Clicked" BackgroundColor="#F2F2F2"/>
+            </StackLayout>
+    </Grid>
 </ContentPage>

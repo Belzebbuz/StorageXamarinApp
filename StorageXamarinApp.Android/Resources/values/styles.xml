@@ -16,7 +16,7 @@
 		<!--<item name="colorAccent">#FF4081</item>-->
 	</style>
 	<style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
-		<item name="colorPrimaryDark">#fff</item>
+		<item name="colorPrimaryDark">#0D0D0D</item>
 	</style>
 <style name="MyTheme.Base" parent="android:style/Theme.Material.Light.DarkActionBar">
    <item name="android:colorPressedHighlight">@color/ListViewSelected</item>

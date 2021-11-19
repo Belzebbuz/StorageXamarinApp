@@ -5,7 +5,8 @@ using FreshMvvm;
 using StorageXamarinApp.ViewModels;
 
 
-
+[assembly: ExportFont("HelveticaNowDisplay-Black.ttf", Alias ="Bold")]
+[assembly: ExportFont("HelveticaNowDisplay-ExtLt.ttf", Alias ="Thin")]
 namespace StorageXamarinApp
 {   
     public partial class App : Application
@@ -15,7 +16,7 @@ namespace StorageXamarinApp
             
             Startup.Init();
             InitializeComponent();
-
+            Device.SetFlags(new[] { "Shapes_Experimental", "Brush_Experimental" });
             MainPage = new NavigationPage(new LoginPage());
         }
 
