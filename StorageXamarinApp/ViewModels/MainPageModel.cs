@@ -13,18 +13,31 @@ namespace StorageXamarinApp.ViewModels
     {
         public MainPageModel()
         {            
-            ShippingViewModel = Startup.ServiceProvider.GetService<ShippingViewModel>();
+            ShippingViewModel = Startup.ServiceProvider.GetService<OperationViewModel>();
             NomenclatureViewModel = Startup.ServiceProvider.GetService<NomenclatureViewModel>();
-            ReceiveViewModel = Startup.ServiceProvider.GetService<ReceiveViewModel>();
+            ReceiveViewModel = Startup.ServiceProvider.GetService<OperationViewModel>();
+            
         }
-        public ShippingViewModel ShippingViewModel { get; set; }
+        public OperationViewModel ShippingViewModel { get; set; }
         public NomenclatureViewModel NomenclatureViewModel { get; set; }
-        public ReceiveViewModel ReceiveViewModel { get; set; }
-        
-        
+        public OperationViewModel ReceiveViewModel { get; set; }
+        private Account _user;
+        public Account User
+        {
+            get { return _user; }
+            set
+            {
+                if (_user != value)
+                {
+                    _user = value;
+                    OnPropertyChanged("User");
+                }
+            }
+        }        
+
         public void UpdateShippingOperations()
         {
-            ShippingViewModel.FillShippingOperations();
+            ShippingViewModel.FillOperations(OperationTypes.Shipping);
         }
         public void UpdateNomenclatures()
         {
@@ -32,14 +45,15 @@ namespace StorageXamarinApp.ViewModels
         }
         public void UpdateReceiveOperations()
         {
-            ReceiveViewModel.FillReceiveOperations();           
+            ReceiveViewModel.FillOperations(OperationTypes.Receiving);           
         }
 
         public void UpdateInfo()
         {
-            ShippingViewModel.FillShippingOperations();
-            NomenclatureViewModel.FillNomenclatures();
-            ReceiveViewModel.FillReceiveOperations();
+            UpdateShippingOperations();
+            UpdateNomenclatures();
+            UpdateReceiveOperations();
+            User = Startup.ServiceProvider.GetService<IAccountService>().GetUserAccount();
         }
     }
 }

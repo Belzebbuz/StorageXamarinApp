@@ -9,27 +9,37 @@ using System.Threading.Tasks;
 
 namespace StorageXamarinApp.Services
 {
-    public interface IReceiveService
+    public interface IOperationService
     {
-        Task<List<Operation>> GetReceiveOperations();
+        Task<List<Operation>> GetOperations(OperationTypes operationType);
 
         Task<string> PostOperation(Operation operation);
     }
-    public class ReceiveService : IReceiveService
+    public class OperationService : IOperationService
     {
-        public ReceiveService(IStorageServer storageServer)
+        public OperationService(IStorageServer storageServer)
         {
             _storageServer = storageServer;
         }
         private readonly IStorageServer _storageServer;
         private List<Operation> _receiveOperations;
 
-        public async Task<List<Operation>> GetReceiveOperations()
+        public async Task<List<Operation>> GetOperations(OperationTypes operationType)
         {
             try
             {
                 var userAccount = Startup.ServiceProvider.GetService<IAccountService>().GetUserAccount();
-                _receiveOperations = await _storageServer.GetReceiveOperations(userAccount.Id);
+                switch (operationType)
+                {
+                    case OperationTypes.Receiving:
+                        _receiveOperations = await _storageServer.GetReceiveOperations(userAccount.Id);
+                        break;
+                    case OperationTypes.Shipping:
+                        _receiveOperations = await _storageServer.GetShippingOperations(userAccount.Id);
+                        break;
+                    default:
+                        break;
+                }                
             }
             catch (ApiException ex)
             {

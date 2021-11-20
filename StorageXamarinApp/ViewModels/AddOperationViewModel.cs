@@ -9,26 +9,26 @@ using System.Threading.Tasks;
 
 namespace StorageXamarinApp.ViewModels
 {
-    public class AddReceiveOperationViewModel
+    public class AddOperationViewModel
     {
-        public AddReceiveOperationViewModel(IReceiveService receiveService, INomenclatureService nomenclatureService)
+        public AddOperationViewModel(IOperationService operationService, INomenclatureService nomenclatureService)
         {
-            _receiveService = receiveService;
+            _operationService = operationService;
             _nomenclatureService = nomenclatureService;
         }
-        private IReceiveService _receiveService;
+        private IOperationService _operationService;
         private INomenclatureService _nomenclatureService;
-        public async Task<string> PostNewOperation(int nomenclatureId, int count)
+        public async Task<string> PostNewOperation(int nomenclatureId, int count, OperationTypes operationType)
         {
             if (nomenclatureId > 0 && count > 0)
             {
-                Operation operation = await ConfigureOperation(nomenclatureId, count); 
+                Operation operation = await ConfigureOperation(nomenclatureId, count, operationType); 
                 if (operation != null)
                 {
-                    var result = await _receiveService.PostOperation(operation);
+                    var result = await _operationService.PostOperation(operation);
                     if (result == "Ok")
                     {
-                        Startup.ServiceProvider.GetService<MainPageModel>().UpdateReceiveOperations();
+                        Startup.ServiceProvider.GetService<MainPageModel>().UpdateInfo();
                         return "Ok";
                     }
                     else
@@ -49,7 +49,25 @@ namespace StorageXamarinApp.ViewModels
 
         }
 
-        private async Task<Operation> ConfigureOperation(int nomenclatureId, int count)
+        public async Task<string> GetNomenclatureName(string id)
+        {
+            if(int.TryParse(id, out int nomenclatureId))
+            {
+                var nomenclature = await _nomenclatureService.GetNomenclature(nomenclatureId);
+                if (nomenclature != null)
+                {
+                    return nomenclature.Name;
+                }
+                return "Not found";
+            }
+            else
+            {
+                return string.Empty;
+            }
+                
+        }
+
+        private async Task<Operation> ConfigureOperation(int nomenclatureId, int count, OperationTypes operationType)
         {
             Nomenclature nomenclature = await _nomenclatureService.GetNomenclature(nomenclatureId);
             if (nomenclature == null)
@@ -62,7 +80,7 @@ namespace StorageXamarinApp.ViewModels
                 Account = account, 
                 Count = count, 
                 DateTime = DateTime.Now, 
-                OperationType = OperationTypes.Receiving,
+                OperationType = operationType,
                 Nomenclature = nomenclature
             };
         }

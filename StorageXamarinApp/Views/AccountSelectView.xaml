@@ -3,35 +3,42 @@
     xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:custom="clr-namespace:StorageXamarinApp.CustomViews"
+    xmlns:custom="clr-namespace:StorageXamarinApp.CustomViews" xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     x:Class="StorageXamarinApp.Views.AccountSelectView">
     <pages:PopupPage.Content>
         <Frame BackgroundColor="White"
            Margin="40,100"
            CornerRadius="20" 
            VerticalOptions="FillAndExpand">
-            <StackLayout Padding="3">
-                <ListView ItemsSource="{Binding Accounts}" 
+            <Grid RowDefinitions="4*,*">
+                <StackLayout Margin="-5" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                    <ListView ItemsSource="{Binding Accounts}" 
                           HasUnevenRows="True" 
-                          ItemTapped="AccountItem_Clicked">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.View>
-                                    <Frame Margin="4" BackgroundColor="#F2F2F2" CornerRadius="10" >
-                                        <Label Text="{Binding Name}" FontSize="15" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
-                                    </Frame>
-                                </ViewCell.View>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Button HeightRequest="30" Text="Close" 
+                          ItemTapped="AccountItem_Clicked"
+                              VerticalOptions="Start">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <pv:PancakeView BackgroundColor="#F2F2F2" Margin="5, 10" HeightRequest="40" CornerRadius="10">
+                                        <pv:PancakeView.Shadow>
+                                            <pv:DropShadow BlurRadius="5"/>
+                                        </pv:PancakeView.Shadow>
+                                        <Label Text="{Binding Name}" FontSize="15" FontFamily="Thin"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black"/>
+                                    </pv:PancakeView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <StackLayout Grid.Row="1" VerticalOptions="End" HorizontalOptions="FillAndExpand">
+                    <Button HeightRequest="30" Text="Close" 
                     Clicked="CloseButton_Clicked"
-                    VerticalOptions="EndAndExpand"
-                    BackgroundColor="#F2F2F2" Margin="40,10" 
+                    VerticalOptions="EndAndExpand" FontFamily="Thin"
+                    BackgroundColor="#F2F2F2" Margin="40,0"
                     FontSize="14" CornerRadius="20" Padding="3"></Button>
-            </StackLayout>
+                </StackLayout>
+            </Grid>
         </Frame>
     </pages:PopupPage.Content>
 

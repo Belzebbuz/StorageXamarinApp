@@ -25,8 +25,7 @@ namespace StorageXamarinApp
             }).ConfigureHttpClient(c => c.BaseAddress = new Uri("https://storageapiservice.azurewebsites.net/api"));
             services.AddSingleton<IAccountService, AccountsService>();
             services.AddSingleton<INomenclatureService, NomenclatureService>();
-            services.AddSingleton<IReceiveService, ReceiveService>();
-            services.AddSingleton<IShippingService, ShippingService>();
+            services.AddSingleton<IOperationService, OperationService>();
             return services;
         }
 
@@ -34,11 +33,9 @@ namespace StorageXamarinApp
         {
             services.AddTransient<AccountsViewModel>();
             services.AddTransient<AddNomenclatureViewModel>();
-            services.AddTransient<AddReceiveOperationViewModel>();
-            services.AddTransient<AddShippingOperationViewModel>();
-            services.AddTransient<ShippingViewModel>();
+            services.AddTransient<AddOperationViewModel>();
+            services.AddTransient<OperationViewModel>();
             services.AddTransient<NomenclatureViewModel>();
-            services.AddTransient<ReceiveViewModel>();
             services.AddSingleton<MainPageModel>();
             return services;
         }

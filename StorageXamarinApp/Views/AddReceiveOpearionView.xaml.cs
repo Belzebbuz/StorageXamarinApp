@@ -14,11 +14,11 @@ namespace StorageXamarinApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddReceiveOpearionView : Rg.Plugins.Popup.Pages.PopupPage
     {
-        AddReceiveOperationViewModel _viewModel;
+        AddOperationViewModel _viewModel;
         public AddReceiveOpearionView()
         {
             InitializeComponent();
-            _viewModel = Startup.ServiceProvider.GetService<AddReceiveOperationViewModel>();
+            _viewModel = Startup.ServiceProvider.GetService<AddOperationViewModel>();
         }
         private void CloseButton_Clicked(object sender, EventArgs e)
         {
@@ -27,23 +27,27 @@ namespace StorageXamarinApp.Views
 
         private async void AddButton_Clicked(object sender, EventArgs e)
         {
-            try
+            if (int.TryParse(EntryNomenclatureId.Text, out int nomenclatureId) &&
+                int.TryParse(EntryCount.Text, out int count))
             {
-                int nomenclatureId = int.Parse(EntryNomenclatureId.Text);
-                int count = int.Parse(EntryCount.Text);
-                var answer = await _viewModel.PostNewOperation(nomenclatureId, count);
+                var answer = await _viewModel.PostNewOperation(nomenclatureId, count, Models.OperationTypes.Receiving);
                 if (answer != "Ok")
                 {
                     await DisplayAlert("Error!", answer, "Ok");
                 }
                 await Navigation.PopPopupAsync();
             }
-            catch (Exception ex)
+            else
             {
-                await DisplayAlert("Error!", ex.Message, "Ok");
+                await DisplayAlert("Error!", "Values must be integers", "Ok");
                 await Navigation.PopPopupAsync();
             }
             
+        }
+
+        private async void EntryNomenclatureId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            NomenclatureName.Text = await _viewModel.GetNomenclatureName(EntryNomenclatureId.Text);
         }
     }
 }

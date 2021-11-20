@@ -4,38 +4,41 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:custom="clr-namespace:StorageXamarinApp.CustomViews"
-    xmlns:xct ="clr-namespace:Xamarin.CommunityToolkit.Behaviors;assembly=Xamarin.CommunityToolkit"
+    xmlns:xct ="clr-namespace:Xamarin.CommunityToolkit.Behaviors;assembly=Xamarin.CommunityToolkit" xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     x:Class="StorageXamarinApp.Views.AddNomenclatureView">
     <pages:PopupPage.Content>
-        <Frame BackgroundColor="White"
-           Margin="40,100"
+        <pv:PancakeView BackgroundColor="White"
+           Margin="40,80"
            CornerRadius="20" 
            VerticalOptions="FillAndExpand">
-            <StackLayout Padding="3">
-                <StackLayout Orientation="Vertical">
-                    <Frame Margin="10" CornerRadius="10" BackgroundColor="#F2F2F2">
-                        <Entry x:Name="EntryName" HorizontalOptions="FillAndExpand" 
-                                   Margin="-10" FontSize="15"
-                                   BackgroundColor="#F2F2F2" Placeholder="Name" PlaceholderColor="LightGray" 
-                                   xct:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference EntryUnit}"/>
-                    </Frame>
-                    <Frame Margin="10" CornerRadius="10" BackgroundColor="#F2F2F2">
-                        <Entry x:Name="EntryUnit" HorizontalOptions="FillAndExpand" 
-                                   Margin="-10" FontSize="15"
-                                   BackgroundColor="#F2F2F2" Placeholder="Unit" PlaceholderColor="LightGray"/>
-                    </Frame>
-                </StackLayout>
-                <Button HeightRequest="40" Text="Add"
-                    VerticalOptions="End"
-                    BackgroundColor="#F2F2F2" Margin="20,70,20,0" 
-                    FontSize="18" CornerRadius="20" Padding="3"
-                        Clicked="AddButton_Clicked"/>
-                <Button HeightRequest="30" Text="Close"
-                    VerticalOptions="EndAndExpand"
-                    BackgroundColor="#F2F2F2" Margin="40,0" 
-                    FontSize="14" CornerRadius="20" Padding="3"
-                        Clicked="CloseButton_Clicked"/>
-            </StackLayout>
-        </Frame>
+            <Grid RowDefinitions="*,*">
+                <Grid RowDefinitions="Auto,*" Margin="10">
+                    <pv:PancakeView CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="White" Margin="0,10,0,5">
+                            <pv:PancakeView.Shadow>
+                                <pv:DropShadow BlurRadius="5"/>
+                            </pv:PancakeView.Shadow>
+                            <Entry x:Name="EntryName" FontFamily="Thin" 
+                               PlaceholderColor="LightGray" 
+                               Placeholder="Name" Margin="10,0" xct:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference EntryUnit}"></Entry>
+                        </pv:PancakeView>
+                        <pv:PancakeView Grid.Row="1" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="White" Margin="0,5">
+                            <pv:PancakeView.Shadow>
+                                <pv:DropShadow BlurRadius="5"/>
+                            </pv:PancakeView.Shadow>
+                            <Entry x:Name="EntryUnit" FontFamily="Thin" PlaceholderColor="LightGray" Placeholder="Unit" Margin="10,0"></Entry>
+                        </pv:PancakeView>
+                    </Grid>
+                    <Grid Grid.Row="1" RowDefinitions="*,Auto">
+                    <pv:PancakeView  Margin="50,0,50,5" VerticalOptions="EndAndExpand" HeightRequest="35" CornerRadius="20">
+                        <Button CornerRadius="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F2"
+                            Text="Add" Font="14" FontFamily="Thin" Clicked="AddButton_Clicked"/>
+                    </pv:PancakeView>
+                    <pv:PancakeView Grid.Row="1" VerticalOptions="EndAndExpand" Margin="50,0,50,10" HeightRequest="35" CornerRadius="20">
+                        <Button CornerRadius="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F2"
+                            Text="Close" Font="14" FontFamily="Thin" Clicked="CloseButton_Clicked"/>
+                    </pv:PancakeView>
+                </Grid>                
+            </Grid>
+        </pv:PancakeView>
     </pages:PopupPage.Content>
 </pages:PopupPage>

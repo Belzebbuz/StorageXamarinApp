@@ -5,18 +5,18 @@
              x:Class="StorageXamarinApp.Views.MainPage"
             NavigationPage.HasNavigationBar="False"
              xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-            xmlns:xct ="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit">
-    <xct:TabView TabStripPlacement="Bottom" >
-        <xct:TabViewItem Text="Receive" TabTapped="ReceivePage_TabTapped" FontFamily="Thin" FontSize="15" BackgroundColor="#1BBFA1" TextColor="White">
+            xmlns:xct ="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit" xmlns:cv="clr-namespace:StorageXamarinApp.CustomViews">
+    <xct:TabView TabStripPlacement="Bottom" IsSwipeEnabled="False">
+        <xct:TabViewItem Text="Receive" FontFamily="Thin" FontSize="15" BackgroundColor="#D9AE96" TextColor="White">
             <xct:TabViewItem.Content>
                 <Grid RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="120"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <BoxView Grid.RowSpan="3">
+                    <BoxView Grid.RowSpan="4">
                         <BoxView.Background>
                             <LinearGradientBrush>
                                 <GradientStopCollection>
@@ -40,8 +40,8 @@
                             <BoxView Grid.RowSpan="2" WidthRequest="120" BackgroundColor="#1BBFA1"/>
                             <BoxView Grid.Column="1" Grid.RowSpan="2" WidthRequest="120" BackgroundColor="White"/>
                             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                <Label Text="Current user:" FontFamily="Thin" FontSize="16" TextColor="White" HorizontalOptions="Center"/>
-                                <Label Text="Administrator" FontFamily="Thin" FontSize="16" TextColor="White" Margin="0,-5,0,0" HorizontalOptions="Center"/>
+                                <Label Text="User:" FontFamily="Thin" FontSize="16" TextColor="White" HorizontalOptions="Center"/>
+                                <Label Text="{Binding User.Name}" FontFamily="Thin" FontSize="18" TextColor="White" Margin="0,-5,0,0" HorizontalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
                                 <Label Text="Operations:" FontFamily="Thin" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
@@ -49,67 +49,61 @@
                             </StackLayout>
                         </Grid>
                     </pv:PancakeView>
-                    <CollectionView Grid.Row="2" Margin="25" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ItemsSource="{Binding ReceiveViewModel.ReceiveOperations}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <pv:PancakeView CornerRadius="5" BackgroundColor="White" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-                                    <SwipeView>
-                                        <SwipeView.LeftItems>
-                                            <SwipeItems>
-                                                <SwipeItemView>
-                                                    <Grid BackgroundColor="#D9AE96" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="60">
-                                                        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                                            <Label Text="Delete" FontFamily="Bold" TextColor="White" HorizontalOptions="Center"/>
-                                                        </StackLayout>
-                                                    </Grid>
-                                                </SwipeItemView>
-                                            </SwipeItems>
-                                        </SwipeView.LeftItems>
-                                        <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*" RowDefinitions="50">
-                                            <BoxView BackgroundColor="#BF7B75" WidthRequest="6" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnDefinitions="0.6*, 1, *,1,1.5*">
-                                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding DateTime, StringFormat='{0:dd}'}" TextColor="Black" FontFamily="Thin" FontSize="27" HorizontalOptions="Center"/>
-                                                    <Label Text="{Binding DateTime, StringFormat='{0:MMMM}'}" TextColor="Black" FontFamily="Thin" FontSize="10" 
+                    <StackLayout Grid.Row="2" Margin="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <ListView ItemsSource="{Binding ReceiveViewModel.Operations}" HasUnevenRows="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <pv:PancakeView CornerRadius="5" Margin="20,5" BackgroundColor="White" HeightRequest="50">
+                                            <pv:PancakeView.Shadow>
+                                                <pv:DropShadow BlurRadius="10"/>
+                                            </pv:PancakeView.Shadow>
+                                            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*">
+                                                <BoxView BackgroundColor="#BF7B75" WidthRequest="6" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnDefinitions="0.6*, 1, *,1,1.5*">
+                                                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                                        <Label Text="{Binding DateTime, StringFormat='{0:dd}'}" TextColor="Black" FontFamily="Thin" FontSize="27" HorizontalOptions="Center"/>
+                                                        <Label Text="{Binding DateTime, StringFormat='{0:MMMM}'}" TextColor="Black" FontFamily="Thin" FontSize="10" 
                                                                HorizontalOptions="Center" Margin="0,-10,0,0"/>
-                                                </StackLayout>
-                                                <BoxView Grid.Column="1" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                                <StackLayout Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Margin="4">
-                                                    <Label Text="{Binding Nomenclature.Name}" FontFamily="Thin" FontSize="15" TextColor="Black"/>
-                                                    <Label Text="{Binding DateTime, StringFormat='{0:hh:mm:ss}'}" FontFamily="Thin" Margin="0,-8,0,0"/>
-                                                </StackLayout>
-                                                <BoxView Grid.Column="3" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                                <StackLayout Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Margin="0,-15,0,0">
-                                                    <Label Text="{Binding Count, StringFormat='Count: {0}'}" FontSize="15" FontFamily="Thin" />
-                                                </StackLayout>
+                                                    </StackLayout>
+                                                    <BoxView Grid.Column="1" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                    <StackLayout Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Margin="4">
+                                                        <Label Text="{Binding Nomenclature.Name}" FontFamily="Thin" FontSize="15" TextColor="Black"/>
+                                                        <Label Text="{Binding DateTime, StringFormat='{0:hh:mm:ss}'}" FontFamily="Thin" Margin="0,-8,0,0"/>
+                                                    </StackLayout>
+                                                    <BoxView Grid.Column="3" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                    <StackLayout Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Margin="0,-15,0,0">
+                                                        <Label Text="{Binding Count, StringFormat='Count: {0}'}" FontSize="15" FontFamily="Thin" />
+                                                    </StackLayout>
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
-                                    </SwipeView>
-                                </pv:PancakeView>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <pv:PancakeView Grid.Row="3" Margin="0,-60,10,20">
-                        <Button HorizontalOptions="End" BackgroundColor="#F2F2F2"
-                            Text="Add" Font="15" CornerRadius="20" FontFamily="Thin" 
+                                        </pv:PancakeView>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                    <pv:PancakeView Grid.Row="3" HeightRequest="35" CornerRadius="10" Margin="50,-25,50,10">
+                        <pv:PancakeView.Shadow>
+                            <pv:DropShadow/>
+                        </pv:PancakeView.Shadow>
+                        <Button CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F2"
+                            Text="Add" Font="13" FontFamily="Thin" 
                             Clicked="AddReceiveOperationButton_Clicked"/>
                     </pv:PancakeView>
                 </Grid>
             </xct:TabViewItem.Content>
         </xct:TabViewItem>
-        <xct:TabViewItem Text="Shipping" TabTapped="ShippingPage_TabTapped" FontFamily="Thin" FontSize="15" BackgroundColor="#1BBFA1" TextColor="White">
+        <xct:TabViewItem Text="Shipping" FontFamily="Thin" FontSize="15" BackgroundColor="#D9AE96" TextColor="White">
             <xct:TabViewItem.Content>
                 <Grid RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="120"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <BoxView Grid.RowSpan="3">
+                    <BoxView Grid.RowSpan="4">
                         <BoxView.Background>
                             <LinearGradientBrush>
                                 <GradientStopCollection>
@@ -133,8 +127,8 @@
                             <BoxView Grid.RowSpan="2" WidthRequest="120" BackgroundColor="#1BBFA1"/>
                             <BoxView Grid.Column="1" Grid.RowSpan="2" WidthRequest="120" BackgroundColor="White"/>
                             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                <Label Text="Current user:" FontFamily="Thin" FontSize="16" TextColor="White" HorizontalOptions="Center"/>
-                                <Label Text="Administrator" FontFamily="Thin" FontSize="16" TextColor="White" Margin="0,-5,0,0" HorizontalOptions="Center"/>
+                                <Label Text="User:" FontFamily="Thin" FontSize="16" TextColor="White" HorizontalOptions="Center"/>
+                                <Label Text="{Binding User.Name}" FontFamily="Thin" FontSize="18" TextColor="White" Margin="0,-5,0,0" HorizontalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
                                 <Label Text="Operations:" FontFamily="Thin" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
@@ -142,68 +136,61 @@
                             </StackLayout>
                         </Grid>
                     </pv:PancakeView>
-                    <CollectionView Grid.Row="2" Margin="25" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                                    ItemsSource="{Binding ShippingViewModel.ShippingOperations}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <pv:PancakeView CornerRadius="5" BackgroundColor="White" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-                                    <SwipeView>
-                                        <SwipeView.LeftItems>
-                                            <SwipeItems>
-                                                <SwipeItemView>
-                                                    <Grid BackgroundColor="#D9AE96" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="60">
-                                                        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                                            <Label Text="Delete" FontFamily="Bold" TextColor="White" HorizontalOptions="Center"/>
-                                                        </StackLayout>
-                                                    </Grid>
-                                                </SwipeItemView>
-                                            </SwipeItems>
-                                        </SwipeView.LeftItems>
-                                        <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*" RowDefinitions="50">
-                                            <BoxView BackgroundColor="#BF7B75" WidthRequest="6" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnDefinitions="0.6*, 1, *,1,1.5*">
-                                                <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                                    <Label Text="{Binding DateTime, StringFormat='{0:dd}'}" TextColor="Black" FontFamily="Thin" FontSize="27" HorizontalOptions="Center"/>
-                                                    <Label Text="{Binding DateTime, StringFormat='{0:MMMM}'}" TextColor="Black" FontFamily="Thin" FontSize="10" 
+                    <StackLayout Grid.Row="2" Margin="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <ListView ItemsSource="{Binding ShippingViewModel.Operations}" HasUnevenRows="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <pv:PancakeView CornerRadius="5" Margin="20,5" BackgroundColor="White" HeightRequest="50">
+                                            <pv:PancakeView.Shadow>
+                                                <pv:DropShadow BlurRadius="10"/>
+                                            </pv:PancakeView.Shadow>
+                                            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*">
+                                                <BoxView BackgroundColor="#BF7B75" WidthRequest="6" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnDefinitions="0.6*, 1, *,1,1.5*">
+                                                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                                        <Label Text="{Binding DateTime, StringFormat='{0:dd}'}" TextColor="Black" FontFamily="Thin" FontSize="27" HorizontalOptions="Center"/>
+                                                        <Label Text="{Binding DateTime, StringFormat='{0:MMMM}'}" TextColor="Black" FontFamily="Thin" FontSize="10" 
                                                                HorizontalOptions="Center" Margin="0,-10,0,0"/>
-                                                </StackLayout>
-                                                <BoxView Grid.Column="1" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                                <StackLayout Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Margin="4">
-                                                    <Label Text="{Binding Nomenclature.Name}" FontFamily="Thin" FontSize="15" TextColor="Black"/>
-                                                    <Label Text="{Binding DateTime, StringFormat='{0:hh:mm:ss}'}" FontFamily="Thin" Margin="0,-8,0,0"/>
-                                                </StackLayout>
-                                                <BoxView Grid.Column="3" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                                <StackLayout Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Margin="0,-15,0,0">
-                                                    <Label Text="{Binding Count, StringFormat='Count: {0}'}" FontSize="15" FontFamily="Thin" />
-                                                </StackLayout>
+                                                    </StackLayout>
+                                                    <BoxView Grid.Column="1" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                    <StackLayout Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Margin="4">
+                                                        <Label Text="{Binding Nomenclature.Name}" FontFamily="Thin" FontSize="15" TextColor="Black"/>
+                                                        <Label Text="{Binding DateTime, StringFormat='{0:hh:mm:ss}'}" FontFamily="Thin" Margin="0,-8,0,0"/>
+                                                    </StackLayout>
+                                                    <BoxView Grid.Column="3" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                    <StackLayout Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center" Margin="0,-15,0,0">
+                                                        <Label Text="{Binding Count, StringFormat='Count: {0}'}" FontSize="15" FontFamily="Thin" />
+                                                    </StackLayout>
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
-                                    </SwipeView>
-                                </pv:PancakeView>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <pv:PancakeView Grid.Row="3" Margin="0,-60,10,20">
-                        <Button HorizontalOptions="End" BackgroundColor="#F2F2F2"
-                            Text="Add" Font="15" CornerRadius="20" FontFamily="Thin" 
+                                        </pv:PancakeView>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                    <pv:PancakeView Grid.Row="3" HeightRequest="35" CornerRadius="10" Margin="50,-25,50,10">
+                        <pv:PancakeView.Shadow>
+                            <pv:DropShadow/>
+                        </pv:PancakeView.Shadow>
+                        <Button CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F2"
+                            Text="Add" Font="13" FontFamily="Thin" 
                             Clicked="AddShippingOperationButton_Clicked"/>
                     </pv:PancakeView>
                 </Grid>
             </xct:TabViewItem.Content>
         </xct:TabViewItem>
-        <xct:TabViewItem Text="Nomenclature" FontFamily="Thin" FontSize="15" BackgroundColor="#1BBFA1" TextColor="White">
+        <xct:TabViewItem Text="Nomenclature" FontFamily="Thin" FontSize="15" BackgroundColor="#D9AE96" TextColor="White">
             <xct:TabViewItem.Content>
                 <Grid RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="120"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <BoxView Grid.RowSpan="3">
+                    <BoxView Grid.RowSpan="4">
                         <BoxView.Background>
                             <LinearGradientBrush>
                                 <GradientStopCollection>
@@ -226,8 +213,8 @@
                             <BoxView Grid.RowSpan="2" WidthRequest="120" BackgroundColor="#1BBFA1"/>
                             <BoxView Grid.Column="1" Grid.RowSpan="2" WidthRequest="120" BackgroundColor="White"/>
                             <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-                                <Label Text="Current user:" FontFamily="Thin" FontSize="16" TextColor="White" HorizontalOptions="Center"/>
-                                <Label Text="Administrator" FontFamily="Thin" FontSize="16" TextColor="White" Margin="0,-5,0,0" HorizontalOptions="Center"/>
+                                <Label Text="User:" FontFamily="Thin" FontSize="16" TextColor="White" HorizontalOptions="Center"/>
+                                <Label Text="{Binding User.Name}" FontFamily="Thin" FontSize="18" TextColor="White" Margin="0,-5,0,0" HorizontalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
                                 <Label Text="Operations:" FontFamily="Thin" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
@@ -235,51 +222,44 @@
                             </StackLayout>
                         </Grid>
                     </pv:PancakeView>
-                    <CollectionView Grid.Row="2" Margin="25" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-                                    ItemsSource="{Binding NomenclatureViewModel.Nomenclatures}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <pv:PancakeView CornerRadius="5" BackgroundColor="White" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
-                                    <SwipeView>
-                                        <SwipeView.LeftItems>
-                                            <SwipeItems>
-                                                <SwipeItemView>
-                                                    <Grid BackgroundColor="#D9AE96" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="60">
-                                                        <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                                            <Label Text="Delete" FontFamily="Bold" TextColor="White" HorizontalOptions="Center"/>
-                                                        </StackLayout>
-                                                    </Grid>
-                                                </SwipeItemView>
-                                            </SwipeItems>
-                                        </SwipeView.LeftItems>
-                                        <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*" RowDefinitions="40">
-                                            <BoxView BackgroundColor="#BF7B75" WidthRequest="6" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                            <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnDefinitions="0.5*, 1, *,1,1.5*">
-                                                <StackLayout HorizontalOptions="Start" VerticalOptions="Center">
-                                                    <Label Text="{Binding Id, StringFormat='Id: {0}'}" TextColor="Black" FontFamily="Thin" FontSize="15" HorizontalOptions="Center"/>
-                                                </StackLayout>
-                                                <BoxView Grid.Column="1" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                                <StackLayout Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Margin="4">
-                                                    <Label Text="{Binding Name}" FontFamily="Thin" FontSize="15" TextColor="Black"/>
-                                                </StackLayout>
-                                                <BoxView Grid.Column="3" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
-                                                <StackLayout Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center">
-                                                    <Label Text="{Binding Unit, StringFormat='Unit - {0}'}" FontSize="15" FontFamily="Thin" />
-                                                </StackLayout>
+                    <StackLayout Grid.Row="2" Margin="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <ListView ItemsSource="{Binding NomenclatureViewModel.Nomenclatures}" HasUnevenRows="True">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <pv:PancakeView CornerRadius="5" Margin="20,5" BackgroundColor="White" HeightRequest="50">
+                                            <pv:PancakeView.Shadow>
+                                                <pv:DropShadow BlurRadius="10"/>
+                                            </pv:PancakeView.Shadow>
+                                            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnDefinitions="Auto,*">
+                                                <BoxView BackgroundColor="#BF7B75" WidthRequest="6" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnDefinitions="0.5*, 1, *,1,1.5*">
+                                                    <StackLayout HorizontalOptions="Start" VerticalOptions="Center">
+                                                        <Label Text="{Binding Id, StringFormat='Id: {0}'}" TextColor="Black" FontFamily="Thin" FontSize="15" HorizontalOptions="Center"/>
+                                                    </StackLayout>
+                                                    <BoxView Grid.Column="1" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                    <StackLayout Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Center" Margin="4">
+                                                        <Label Text="{Binding Name}" FontFamily="Thin" FontSize="15" TextColor="Black"/>
+                                                    </StackLayout>
+                                                    <BoxView Grid.Column="3" Color="#f2f4f8" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                                                    <StackLayout Grid.Column="4" HorizontalOptions="Start" VerticalOptions="Center">
+                                                        <Label Text="{Binding Unit, StringFormat='Unit - {0}'}" FontSize="15" FontFamily="Thin" />
+                                                    </StackLayout>
+                                                </Grid>
                                             </Grid>
-                                        </Grid>
-                                    </SwipeView>
-                                </pv:PancakeView>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                    <pv:PancakeView Grid.Row="3" Margin="0,-60,10,20">
-                        <Button HorizontalOptions="End"
+                                        </pv:PancakeView>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                    <pv:PancakeView Grid.Row="3" HeightRequest="35" CornerRadius="20" Margin="50,-25,50,10">
+                        <pv:PancakeView.Shadow>
+                            <pv:DropShadow/>
+                        </pv:PancakeView.Shadow>
+                        <Button CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                         x:Name="AddNomenclatureButton" BackgroundColor="#F2F2F2"
-                            Text="Add" Font="15" CornerRadius="20" FontFamily="Thin" 
+                            Text="Add" Font="13" FontFamily="Thin" 
                             Clicked="AddNomenclatureButton_Clicked"/>
                     </pv:PancakeView>
                 </Grid>

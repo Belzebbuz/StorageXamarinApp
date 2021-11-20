@@ -33,17 +33,6 @@ namespace StorageXamarinApp.Views
             _addNomenclatureView = new AddNomenclatureView();
             await Navigation.PushPopupAsync(_addNomenclatureView);
         }
-
-        private void ShippingPage_TabTapped(object sender, Xamarin.CommunityToolkit.UI.Views.TabTappedEventArgs e)
-        {
-            _model.UpdateShippingOperations(); 
-        }
-
-        private void ReceivePage_TabTapped(object sender, Xamarin.CommunityToolkit.UI.Views.TabTappedEventArgs e)
-        {
-            _model.UpdateReceiveOperations();
-        }
-
         private async void AddReceiveOperationButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushPopupAsync(new AddReceiveOpearionView());
