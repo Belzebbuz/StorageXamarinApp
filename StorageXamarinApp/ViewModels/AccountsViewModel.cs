@@ -16,28 +16,17 @@ namespace StorageXamarinApp.ViewModels
         public AccountsViewModel(IAccountService accountService)
         {
             _accountService = accountService;
-            FillAccounts();
+            Accounts = new ObservableCollection<Account>();
         }
 
         private IAccountService _accountService;
-        private List<Account> _accounts;
-
-        public List<Account> Accounts
-        {
-            get { return _accounts; }
-            set 
-            { 
-                if(_accounts != value)
-                {
-                    _accounts = value;
-                    OnPropertyChanged("Accounts");
-                }
-            }
-        }
+        public ObservableCollection<Account> Accounts { get; private set; }
 
         public async void FillAccounts()
         {
-            Accounts = await _accountService.GetAccounts();
+            var accountsList = await _accountService.GetAccounts();
+            Accounts.Clear();
+            accountsList.ForEach(account => Accounts.Add(account));
         }
     }
 }

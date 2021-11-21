@@ -15,12 +15,18 @@ namespace StorageXamarinApp.Views
     public partial class AccountSelectView : Rg.Plugins.Popup.Pages.PopupPage
     {
         public event EventHandler<ItemTappedEventArgs> AccountSelected;
+        private AccountsViewModel _viewModel;
         public AccountSelectView()
         {
             InitializeComponent();
-            BindingContext = Startup.ServiceProvider.GetService<AccountsViewModel>();                        
+            _viewModel = Startup.ServiceProvider.GetService<AccountsViewModel>();  
+            BindingContext = _viewModel;
         }
 
+        protected override void OnAppearing()
+        {
+            _viewModel.FillAccounts();
+        }
         private void CloseButton_Clicked(object sender, EventArgs e)
         { 
             Navigation.PopPopupAsync();            

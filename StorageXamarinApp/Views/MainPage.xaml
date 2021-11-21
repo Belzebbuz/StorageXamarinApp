@@ -20,8 +20,8 @@
                         <BoxView.Background>
                             <LinearGradientBrush>
                                 <GradientStopCollection>
-                                    <GradientStop Color="#17A68C" Offset="0"/>
-                                    <GradientStop Color="#1BBFA1" Offset="1"/>
+                                    <GradientStop Color="#006457" Offset="0"/>
+                                    <GradientStop Color="#1BC8A8" Offset="1"/>
                                 </GradientStopCollection>
                             </LinearGradientBrush>
                         </BoxView.Background>
@@ -107,8 +107,8 @@
                         <BoxView.Background>
                             <LinearGradientBrush>
                                 <GradientStopCollection>
-                                    <GradientStop Color="#17A68C" Offset="0"/>
-                                    <GradientStop Color="#1BBFA1" Offset="1"/>
+                                    <GradientStop Color="#006457" Offset="0"/>
+                                    <GradientStop Color="#1BC8A8" Offset="1"/>
                                 </GradientStopCollection>
                             </LinearGradientBrush>
                         </BoxView.Background>
@@ -194,15 +194,15 @@
                         <BoxView.Background>
                             <LinearGradientBrush>
                                 <GradientStopCollection>
-                                    <GradientStop Color="#17A68C" Offset="0"/>
-                                    <GradientStop Color="#1BBFA1" Offset="1"/>
+                                    <GradientStop Color="#006457" Offset="0"/>
+                                    <GradientStop Color="#1BC8A8" Offset="1"/>
                                 </GradientStopCollection>
                             </LinearGradientBrush>
                         </BoxView.Background>
                     </BoxView>
-                    <Grid BackgroundColor="#D9AE96" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid BackgroundColor="#D4A890" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="0,-20,0,0">
-                            <Label TextColor="Black" FontFamily="Thin" FontSize="40" Text="Nomenclature" HorizontalOptions="Center"/>
+                            <Label TextColor="Black" FontFamily="Thin" FontSize="40" Text="NOMENCLATURE" HorizontalOptions="Center"/>
                         </StackLayout>
                     </Grid>
                     <pv:PancakeView Grid.Row="1" HeightRequest="60" HorizontalOptions="Center" Margin="0,-30,0,0" CornerRadius="15">

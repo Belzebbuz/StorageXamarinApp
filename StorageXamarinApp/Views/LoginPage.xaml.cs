@@ -40,7 +40,7 @@ namespace StorageXamarinApp
             _selectedAccount = e.Item as Account;
             if (StartButton.Scale != 1)
             {
-                UIAnimations.AnimateInOutScaleRotation(StartButton);
+                UIAnimations.AnimateInOutScale(StartButton);
             }
 
         }

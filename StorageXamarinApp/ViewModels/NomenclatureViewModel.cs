@@ -2,6 +2,7 @@
 using StorageXamarinApp.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,10 @@ namespace StorageXamarinApp.ViewModels
         public NomenclatureViewModel(INomenclatureService nomenclatureService)
         {
             _nomenclatureService = nomenclatureService;
+            Nomenclatures = new ObservableCollection<Nomenclature>();
         }
         private INomenclatureService _nomenclatureService;
-        private List<Nomenclature> _nomenclatures;
+        public ObservableCollection<Nomenclature> Nomenclatures { get; private set; }
         private int _nomenclatureCount;
 
         public int NomenclatureCount
@@ -32,24 +34,11 @@ namespace StorageXamarinApp.ViewModels
             }
         }
 
-        public List<Nomenclature> Nomenclatures
-        {
-            get
-            {
-                return _nomenclatures;
-            }
-            set
-            {
-                if (_nomenclatures != value)
-                {
-                    _nomenclatures = value;
-                    OnPropertyChanged("Nomenclatures");
-                }
-            }
-        }
         public async void FillNomenclatures()
         {
-            Nomenclatures = await _nomenclatureService.GetNomenclatures();
+            var nomenclatureList = await _nomenclatureService.GetNomenclatures();
+            Nomenclatures.Clear();
+            nomenclatureList.ForEach(nom => Nomenclatures.Add(nom));
             NomenclatureCount = Nomenclatures.Count;
         }
     }

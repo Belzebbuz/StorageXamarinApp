@@ -9,15 +9,10 @@ namespace StorageXamarinApp.CustomViews
 {
     public static class UIAnimations
     {
-        public async static void AnimateInOutScaleRotation(Button button, double scale = 1.2, double rotation = 420)
+        public async static void AnimateInOutScale(Button button, double scale = 1.2)
         {
-            await Task.WhenAll(
-                button.ScaleTo(scale, 250, Easing.CubicOut),
-                button.RotateTo(rotation, 250, Easing.CubicOut));
-            await Task.WhenAll(
-                button.ScaleTo(1, 350, Easing.SinIn),
-                button.RotateTo(360, 350, Easing.SinIn)
-                );
+            await button.ScaleTo(scale, 250, Easing.CubicOut);
+            await button.ScaleTo(1, 350, Easing.SinIn);
         }
         public async static void AnimateClickScale(Button button, double scale = 1.2)
         {
