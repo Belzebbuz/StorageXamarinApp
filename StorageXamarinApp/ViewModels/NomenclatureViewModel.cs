@@ -16,6 +16,22 @@ namespace StorageXamarinApp.ViewModels
         }
         private INomenclatureService _nomenclatureService;
         private List<Nomenclature> _nomenclatures;
+        private int _nomenclatureCount;
+
+        public int NomenclatureCount
+        {
+            get { return _nomenclatureCount; }
+            set 
+            {
+                if (_nomenclatureCount != value)
+                {
+                    _nomenclatureCount = value;
+                    OnPropertyChanged("NomenclatureCount");
+                }
+                
+            }
+        }
+
         public List<Nomenclature> Nomenclatures
         {
             get
@@ -34,6 +50,7 @@ namespace StorageXamarinApp.ViewModels
         public async void FillNomenclatures()
         {
             Nomenclatures = await _nomenclatureService.GetNomenclatures();
+            NomenclatureCount = Nomenclatures.Count;
         }
     }
 }

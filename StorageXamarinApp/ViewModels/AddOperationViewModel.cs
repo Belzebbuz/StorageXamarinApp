@@ -28,7 +28,7 @@ namespace StorageXamarinApp.ViewModels
                     var result = await _operationService.PostOperation(operation);
                     if (result == "Ok")
                     {
-                        Startup.ServiceProvider.GetService<MainPageModel>().UpdateInfo();
+                        UpdateMainPageInfo(operationType);
                         return "Ok";
                     }
                     else
@@ -47,6 +47,19 @@ namespace StorageXamarinApp.ViewModels
                 return "All fields must be greater than zero!";
             }
 
+        }
+
+        private static void UpdateMainPageInfo(OperationTypes operationType)
+        {
+            switch(operationType)
+            {
+                case OperationTypes.Receiving:
+                    Startup.ServiceProvider.GetService<MainPageModel>().UpdateReceiveOperations();
+                    break;
+                case OperationTypes.Shipping:
+                    Startup.ServiceProvider.GetService<MainPageModel>().UpdateShippingOperations();
+                    break;
+            }
         }
 
         public async Task<string> GetNomenclatureName(string id)

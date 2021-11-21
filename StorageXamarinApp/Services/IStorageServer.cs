@@ -23,9 +23,14 @@ namespace StorageXamarinApp.Services
 
         [Get("/operations/{accountId}/0")]
         Task<List<Operation>> GetReceiveOperations(int accountId);
+
         [Post("/operations")]
         Task PostOperation([Body]Operation operation);
+
         [Get("/nomenclatures/{Id}")]
         Task<Nomenclature> GetNomenclature(int Id);
+
+        [Delete("/operations/{Id}")]
+        Task DeleteOperation(int Id);
     }
 }

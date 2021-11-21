@@ -45,12 +45,12 @@
                             </StackLayout>
                             <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
                                 <Label Text="Operations:" FontFamily="Thin" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
-                                <Label Text="123" FontFamily="Thin" FontSize="16" TextColor="Black" Margin="0,-5,0,0" HorizontalOptions="Center"/>
+                                <Label Text="{Binding ReceiveViewModel.OperationsCount}" FontFamily="Thin" FontSize="16" TextColor="Black" Margin="0,-5,0,0" HorizontalOptions="Center"/>
                             </StackLayout>
                         </Grid>
                     </pv:PancakeView>
                     <StackLayout Grid.Row="2" Margin="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <ListView ItemsSource="{Binding ReceiveViewModel.Operations}" HasUnevenRows="True">
+                        <ListView ItemTapped="ListOperation_ItemTapped" x:Name="ReceiveListView" IsPullToRefreshEnabled="True" ItemsSource="{Binding ReceiveViewModel.Operations}" HasUnevenRows="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
@@ -132,12 +132,12 @@
                             </StackLayout>
                             <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
                                 <Label Text="Operations:" FontFamily="Thin" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
-                                <Label Text="123" FontFamily="Thin" FontSize="16" TextColor="Black" Margin="0,-5,0,0" HorizontalOptions="Center"/>
+                                <Label Text="{Binding ShippingViewModel.OperationsCount}" FontFamily="Thin" FontSize="16" TextColor="Black" Margin="0,-5,0,0" HorizontalOptions="Center"/>
                             </StackLayout>
                         </Grid>
                     </pv:PancakeView>
                     <StackLayout Grid.Row="2" Margin="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <ListView ItemsSource="{Binding ShippingViewModel.Operations}" HasUnevenRows="True">
+                        <ListView ItemTapped="ListOperation_ItemTapped" x:Name="ShippingListView" IsPullToRefreshEnabled="True" ItemsSource="{Binding ShippingViewModel.Operations}" HasUnevenRows="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>
@@ -217,13 +217,13 @@
                                 <Label Text="{Binding User.Name}" FontFamily="Thin" FontSize="18" TextColor="White" Margin="0,-5,0,0" HorizontalOptions="Center"/>
                             </StackLayout>
                             <StackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center">
-                                <Label Text="Operations:" FontFamily="Thin" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
-                                <Label Text="123" FontFamily="Thin" FontSize="16" TextColor="Black" Margin="0,-5,0,0" HorizontalOptions="Center"/>
+                                <Label Text="Count:" FontFamily="Thin" FontSize="16" TextColor="Black" HorizontalOptions="Center"/>
+                                <Label Text="{Binding NomenclatureViewModel.NomenclatureCount}" FontFamily="Thin" FontSize="16" TextColor="Black" Margin="0,-5,0,0" HorizontalOptions="Center"/>
                             </StackLayout>
                         </Grid>
                     </pv:PancakeView>
                     <StackLayout Grid.Row="2" Margin="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <ListView ItemsSource="{Binding NomenclatureViewModel.Nomenclatures}" HasUnevenRows="True">
+                        <ListView x:Name="NomenclatureListView" IsPullToRefreshEnabled="True" ItemsSource="{Binding NomenclatureViewModel.Nomenclatures}" HasUnevenRows="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <ViewCell>

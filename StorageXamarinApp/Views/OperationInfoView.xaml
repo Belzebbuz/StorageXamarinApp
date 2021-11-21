@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                  xmlns="http://xamarin.com/schemas/2014/forms"                  
+                  xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorageXamarinApp.Views.OperationInfoView">
+    <pv:PancakeView Margin="40,80" BackgroundColor="White" CornerRadius="20" VerticalOptions="FillAndExpand">
+        <Grid RowDefinitions="*,Auto">
+            <StackLayout Margin="15" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <Label Text="{Binding Operation.Account.Name, StringFormat='User: {0}'}" FontFamily="Thin" FontSize="15"/>
+                <Label Text="{Binding Operation.Nomenclature.Name, StringFormat='Nomenclature: {0}'}" FontFamily="Thin" FontSize="15"/>
+                <Label Text="{Binding Operation.Count, StringFormat='Count: {0}'}" FontFamily="Thin" FontSize="15"/>
+                <Label Text="{Binding Operation.DateTime, StringFormat='Date: {0:dd MMMM yyyy — hh:mm:ss}'}" FontFamily="Thin" FontSize="15"/>
+                <Label Text="{Binding Operation.OperationType, StringFormat='OperationType: {0}'}" FontFamily="Thin" FontSize="15"/>
+            </StackLayout>
+            <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand">
+                <pv:PancakeView  Margin="50,0,50,5" VerticalOptions="EndAndExpand" HeightRequest="35" CornerRadius="20">
+                    <Button CornerRadius="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F2"
+                            Text="Delete" Font="14" FontFamily="Thin" Clicked="DeleteButton_Clicked"/>
+                </pv:PancakeView>
+                <pv:PancakeView VerticalOptions="EndAndExpand" Margin="50,0,50,10" HeightRequest="35" CornerRadius="20">
+                    <Button CornerRadius="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F2"
+                            Text="Close" Font="14" FontFamily="Thin" Clicked="CloseButton_Clicked"/>
+                </pv:PancakeView>
+            </StackLayout>
+        </Grid>
+    </pv:PancakeView>
+</pages:PopupPage>

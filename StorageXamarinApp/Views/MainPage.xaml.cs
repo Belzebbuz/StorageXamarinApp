@@ -1,5 +1,6 @@
 ﻿using Rg.Plugins.Popup.Extensions;
 using StorageXamarinApp.CustomViews;
+using StorageXamarinApp.Models;
 using StorageXamarinApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,30 @@ namespace StorageXamarinApp.Views
         protected override void OnAppearing()
         {
             _model.UpdateInfo();
+            ReceiveListView.Refreshing += ReceiveListView_Refreshing;
+            NomenclatureListView.Refreshing += NomenclatureListView_Refreshing;
+            ShippingListView.Refreshing += ShippingListView_Refreshing;
+        }
+
+        private void ShippingListView_Refreshing(object sender, EventArgs e)
+        {
+            ShippingListView.IsRefreshing = true;
+            _model.UpdateShippingOperations();
+            ShippingListView.IsRefreshing = false;
+        }
+
+        private void NomenclatureListView_Refreshing(object sender, EventArgs e)
+        {
+            NomenclatureListView.IsRefreshing = true;
+            _model.UpdateNomenclatures();
+            NomenclatureListView.IsRefreshing= false;
+        }
+
+        private void ReceiveListView_Refreshing(object sender, EventArgs e)
+        {
+            ReceiveListView.IsRefreshing = true;
+            _model.UpdateReceiveOperations();
+            ReceiveListView.IsRefreshing = false;
         }
 
         private async void AddNomenclatureButton_Clicked(object sender, EventArgs e)
@@ -40,6 +65,11 @@ namespace StorageXamarinApp.Views
         private async void AddShippingOperationButton_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushPopupAsync(new AddShippingOperationView());
+        }
+
+        private async void ListOperation_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            await Navigation.PushPopupAsync(new OperationInfoView(e.Item as Operation));
         }
     }
 }

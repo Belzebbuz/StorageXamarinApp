@@ -16,6 +16,22 @@ namespace StorageXamarinApp.ViewModels
         }
         private IOperationService _operationService;
         private List<Operation> _operations;
+        private int _operationsCount;
+
+        public int OperationsCount
+        {
+            get { return _operationsCount; }
+            set 
+            {
+                if (_operationsCount != value)
+                {
+                    _operationsCount = value;
+                    OnPropertyChanged("OperationsCount");
+                }
+                
+            }
+        }
+
         public List<Operation> Operations
         {
             get
@@ -34,6 +50,7 @@ namespace StorageXamarinApp.ViewModels
         public async void FillOperations(OperationTypes operationType)
         {
             Operations = await _operationService.GetOperations(operationType);
+            OperationsCount = Operations.Where(x => x.OperationType == operationType).Count();
         }
     }
 }

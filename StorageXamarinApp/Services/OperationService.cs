@@ -14,6 +14,7 @@ namespace StorageXamarinApp.Services
         Task<List<Operation>> GetOperations(OperationTypes operationType);
 
         Task<string> PostOperation(Operation operation);
+        Task<string> DeleteOperation(int id);
     }
     public class OperationService : IOperationService
     {
@@ -59,6 +60,20 @@ namespace StorageXamarinApp.Services
             catch (ApiException ex)
             {
                 return ex.ToString();
+            }
+        }
+
+        public async Task<string> DeleteOperation(int id)
+        {
+            try
+            {
+                await _storageServer.DeleteOperation(id);
+                return "Ok";
+            }
+            catch (ApiException ex)
+            {
+
+                return ex.Message;
             }
         }
     }
